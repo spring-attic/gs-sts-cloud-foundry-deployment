@@ -3,29 +3,21 @@ tags: []
 projects: [spring-framework]
 ---
 :spring_version: current
+:jdk: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 :spring_boot_version: 1.1.10.RELEASE
-:Component: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Component.html
-:Controller: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Controller.html
-:DispatcherServlet: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/web/servlet/DispatcherServlet.html
-:SpringApplication: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
-:RequestParam: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html
-:Configuration: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/context/annotation/Configuration.html
-:ComponentScan: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/context/annotation/ComponentScan.html
-:View: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/web/servlet/View.html
-:ResponseBody: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/web/bind/annotation/ResponseBody.html
-:Model: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/ui/Model.html
-:EnableAutoConfiguration: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/autoconfigure/EnableAutoConfiguration.html
+:gs-serving-web-content: link:/guides/gs/serving-web-content
+
 :toc:
 :icons: font
 :source-highlighter: prettify
-:project_id: gs-serving-web-content
-This guide walks you through the process of creating a "hello world" web site with Spring.
+:project_id: gs-spring-sts-cf-deployment
+This guide walks you through the process of deploying a "hello world" Spring application to Cloud Foundry from Spring Tool Suite.
 
-== What you'll build
+== What you'll deploy to Cloud Foundry
 
-You'll build a service that will accept HTTP GET requests at:
+You'll deploy a Spring application to Cloud Foundry that will accept HTTP GET requests at:
 
-    http://localhost:8080/greeting
+    https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting
 
 and respond with a web page displaying a greeting:
 
@@ -33,89 +25,98 @@ and respond with a web page displaying a greeting:
 
 You can customize the greeting with an optional `name` parameter in the query string:
 
-    http://localhost:8080/greeting?name=User
+    https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting?name=User
 
 The `name` parameter value overrides the default value of "World" and is reflected in the response:
 
     "Hello, User!"
+    
+This application is based on an Spring service that serves web content. Further information on how to create the service from scratch can be found at
+{gs-serving-web-content}[Serving Web Content with Spring MVC], or it can be imported into STS through the Getting Started Guide Import Wizard.
 
 
 == What you'll need
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
+ - About 15 minutes
+ - http://spring.io/tools/sts/all[Spring Tool Suite (STS)]
+ - {jdk}[JDK 7] or later
+ - http://docs.run.pivotal.io/starting/index.html#signup[Pivotal Web Services (PWS) account]
+ - Cloud Foundry Eclipse
 
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
+== Installing STS
+If you don't have STS installed yet, visit the link up above. From there, you can download a copy for your platform. To install it simply 
+unpack the downloaded archive.
+
+When you're done, go ahead and launch STS.
+
+== Installing Cloud Foundry Eclipse
+If you are using STS version 3.6.3 or higher, Cloud Foundry Eclipse comes pre-installed, and you can skip this step. Otherwise, in STS, go to Window -> Install New Software.
+
+image::images/install_menu.png[Install Menu]
+
+In the Install dialogue, enter the following software installation URL for Cloud Foundry Eclipse:
+
+http://dist.springsource.com/release/TOOLS/cloudfoundry
+
+image::images/install_dialogue.png[Install Cloud Foundry]
+
+Select the plug-in from the list and continue with the wizard until completion.
+
+After Cloud Foundry Eclipse is installed, you will have to restart STS.
 
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-gradle.adoc[]
+== Creating a Server Instance to Cloud Foundry
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-maven.adoc[]
+With Cloud Foundry Eclipse installed, you must first create a representation of the Cloud space target where you would like to deploy
+your application too. This is known as a "server instance" in the Eclipse Web Tools Platform framework, which Cloud Foundry Eclipse 
+contributes to. To create a Cloud Foundry server instance, open the Eclipse Servers view from the Window -> Show View menu, right-click on the view and select:
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-sts.adoc[]
+New -> Server
 
+image::images/servers_view.png[New Server Menu]
 
+Select Cloud Foundry under "Pivotal", and either keep the default server instance name or enter a new one.
 
-[[initial]]
-== Create a web controller
+image::images/newserver_pivotal.png[New Server Pivotal]
 
-In Spring's approach to building web sites, HTTP requests are handled by a controller. You can easily identify these requests by the {Controller}[`@Controller`] annotation. In the following example, the GreetingController handles GET requests for /greeting by returning the name of a {View}[`View`], in this case, "greeting". A `View` is responsible for rendering the HTML content:
+Go to the next page and enter your username and password for your Pivotal Web Services account. Note that you must have an 
+account registered as a prerequisite to deploying your application to PWS.
 
-`src/main/java/hello/GreetingController.java`
-[source,java]
-----
-include::complete/src/main/java/hello/GreetingController.java[]
-----
+image::images/newserver_credentialsl.png[New Server Credentials]
 
-This controller is concise and simple, but there's plenty going on. Let's break it down step by step.
+Navigate to the following page, which will automatically attempt to validate your credentials. The subsequent page will display
+the organizations and spaces in your account. Select the target space for your deployment. In this guide we select a deployment 
+space.
 
-The `@RequestMapping` annotation ensures that HTTP requests to `/greeting` are mapped to the `greeting()` method.
+image::images/newserver_space.png[New Server Spaces]
 
-NOTE: The above example does not specify `GET` vs. `PUT`, `POST`, and so forth, because `@RequestMapping` maps all HTTP operations by default. Use `@RequestMapping(method=GET)` to narrow this mapping.
-
-{RequestParam}[`@RequestParam`] binds the value of the query String parameter `name` into the `name` parameter of the `greeting()` method. This query String parameter is not `required`; if it is absent in the request, the `defaultValue` of "World" is used. The value of the `name` parameter is added to a {Model}[`Model`] object, ultimately making it accessible to the view template.
-
-The implementation of the method body relies on a link:/understanding/view-templates[view technology], in this case http://www.thymeleaf.org/doc/html/Thymeleaf-Spring3.html[Thymeleaf], to perform server-side rendering of the HTML. Thymeleaf parses the `greeting.html` template below and evaluates the `th:text` expression to render the value of the `${name}` parameter that was set in the controller.
-
-`src/main/resources/templates/greeting.html`
-[source,html]
-----
-include::complete/src/main/resources/templates/greeting.html[]
-----
+Click "Finish" to complete the server instance creation, which will then show in the Servers view.
 
 
-== Make the application executable
-
-Although it is possible to package this service as a traditional link:/understanding/WAR[WAR] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the link:/understanding/Tomcat[Tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
 
 
-`src/main/java/hello/Application.java`
-[source,java]
-----
-include::complete/src/main/java/hello/Application.java[]
-----
+== Create a Spring Serving-Web-Content Application
 
-The `main()` method defers to the {SpringApplication}[`SpringApplication`] helper class, providing `Application.class` as an argument to its `run()` method. This tells Spring to read the annotation metadata from `Application` and to manage it as a component in the link:/understanding/application-context[Spring application context].
+Now we will deploy a Spring application that serves web content. In STS, open the "Import Spring Getting Started Content" wizard:
 
-The {ComponentScan}[`@ComponentScan`] annotation tells Spring to search recursively through the `hello` package and its children for classes marked directly or indirectly with Spring's {Component}[`@Component`] annotation. This directive ensures that Spring finds and registers the `GreetingController`, because it is marked with {Controller}[`@Controller`], which in turn is a kind of {Component}[`@Component`] annotation.
+image::images/import_gsg.png[Import Getting Started]
 
-The {EnableAutoConfiguration}[`@EnableAutoConfiguration`] annotation switches on reasonable default behaviors based on the content of your classpath. For example, because the application depends on the embeddable version of Tomcat (tomcat-embed-core.jar), a Tomcat server is set up and configured with reasonable defaults on your behalf. And because the application also depends on Spring MVC (spring-webmvc.jar), a Spring MVC {DispatcherServlet}[`DispatcherServlet`] is configured and registered for you — no `web.xml` necessary! Auto-configuration is a powerful, flexible mechanism. See the {EnableAutoConfiguration}[API documentation] for further details.
-
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
-
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
+In the search field, enter 
 
 
-Logging output is displayed. The service should be up and running within a few seconds.
+
 
 
 == Test the service
 
-Now that the web site is running, visit http://localhost:8080/greeting, where you see:
+Now that the web site is running on Cloud Foundry, visit https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting
+, where you see:
 
     "Hello, World!"
 
-Provide a `name` query string parameter with http://localhost:8080/greeting?name=User. Notice how the message changes from "Hello, World!" to "Hello, User!":
+Provide a `name` query string parameter with https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting
+?name=User. Notice how the message changes from "Hello, World!" to "Hello, User!":
 
     "Hello, User!"
 
