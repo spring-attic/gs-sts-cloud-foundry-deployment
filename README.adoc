@@ -17,7 +17,7 @@ This guide walks you through the process of deploying a "hello world" Spring app
 
 You'll deploy a Spring application to Cloud Foundry that will accept HTTP GET requests at:
 
-    https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting
+    http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting
 
 and respond with a web page displaying a greeting:
 
@@ -25,11 +25,13 @@ and respond with a web page displaying a greeting:
 
 You can customize the greeting with an optional `name` parameter in the query string:
 
-    https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting?name=User
+    http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting?name=User
 
 The `name` parameter value overrides the default value of "World" and is reflected in the response:
 
     "Hello, User!"
+    
+The `yourname` portion of the URL is what you will specify when you deploy your application to Cloud Foundry through STS.
     
 This application is based on an Spring service that serves web content. Further information on how to create the service from scratch can be found at
 {gs-serving-web-content}[Serving Web Content with Spring MVC], or it can be imported into STS through the Getting Started Guide Import Wizard.
@@ -41,7 +43,7 @@ This application is based on an Spring service that serves web content. Further 
  - http://spring.io/tools/sts/all[Spring Tool Suite (STS)]
  - {jdk}[JDK 7] or later
  - http://docs.run.pivotal.io/starting/index.html#signup[Pivotal Web Services (PWS) account]
- - Cloud Foundry Eclipse
+ - http://docs.run.pivotal.io/buildpacks/java/sts.html[Cloud Foundry Eclipse]
 
 
 == Installing STS
@@ -51,15 +53,19 @@ unpack the downloaded archive.
 When you're done, go ahead and launch STS.
 
 == Installing Cloud Foundry Eclipse
-If you are using STS version 3.6.3 or higher, Cloud Foundry Eclipse comes pre-installed, and you can skip this step. Otherwise, in STS, go to Window -> Install New Software.
+If you are using STS version 3.6.3 or higher, Cloud Foundry Eclipse comes pre-installed, and you can skip this step. 
+
+Otherwise, in STS, go to Window -> Install New Software.
 
 image::images/install_menu.png[Install Menu]
+
 
 In the Install dialogue, enter the following software installation URL for Cloud Foundry Eclipse:
 
 http://dist.springsource.com/release/TOOLS/cloudfoundry
 
 image::images/install_dialogue.png[Install Cloud Foundry]
+
 
 Select the plug-in from the list and continue with the wizard until completion.
 
@@ -76,20 +82,24 @@ New -> Server
 
 image::images/servers_view.png[New Server Menu]
 
+
 Select Cloud Foundry under "Pivotal", and either keep the default server instance name or enter a new one.
 
 image::images/newserver_pivotal.png[New Server Pivotal]
+
 
 Go to the next page and enter your username and password for your Pivotal Web Services account. Note that http://docs.run.pivotal.io/starting/index.html#signup[you must have an 
 account registered] as a prerequisite to deploying your application to PWS.
 
 image::images/newserver_credentials.png[New Server Credentials]
 
-Navigate to the following page, which will automatically attempt to validate your credentials. The subsequent page will display
+
+Select "Next" to navigate to the following page, which will automatically attempt to validate your credentials. The subsequent page will display
 the organizations and spaces in your account. Select the target space for your deployment. In this guide we select a deployment 
 space.
 
 image::images/newserver_space.png[New Server Spaces]
+
 
 Click "Finish" to complete the server instance creation, which will then show in the Servers view.
 
@@ -101,6 +111,7 @@ Click "Finish" to complete the server instance creation, which will then show in
 Now we will deploy a Spring application that serves web content. In STS, open the "Import Spring Getting Started Content" wizard:
 
 image::images/import_gsg.png[Import Getting Started]
+
 
 In the search field, enter "sts" and the sts-cloud-foundry-deployment guide should appear. The wizard may take a few
 moments to download the content for the guide. Once the download is completed:
