@@ -80,10 +80,10 @@ Select Cloud Foundry under "Pivotal", and either keep the default server instanc
 
 image::images/newserver_pivotal.png[New Server Pivotal]
 
-Go to the next page and enter your username and password for your Pivotal Web Services account. Note that you must have an 
-account registered as a prerequisite to deploying your application to PWS.
+Go to the next page and enter your username and password for your Pivotal Web Services account. Note that http://docs.run.pivotal.io/starting/index.html#signup[you must have an 
+account registered] as a prerequisite to deploying your application to PWS.
 
-image::images/newserver_credentialsl.png[New Server Credentials]
+image::images/newserver_credentials.png[New Server Credentials]
 
 Navigate to the following page, which will automatically attempt to validate your credentials. The subsequent page will display
 the organizations and spaces in your account. Select the target space for your deployment. In this guide we select a deployment 
@@ -102,7 +102,17 @@ Now we will deploy a Spring application that serves web content. In STS, open th
 
 image::images/import_gsg.png[Import Getting Started]
 
-In the search field, enter 
+In the search field, enter "sts" and the sts-cloud-foundry-deployment guide should appear. The wizard may take a few
+moments to download the content for the guide. Once the download is completed:
+
+- Select the build type.
+- Select the "default" code set.
+- Click "Finish".
+
+The import wizard will create a new project in your workspace called "sts-cloud-foundry-deployment".
+
+
+== Deploying to Cloud Foundry
 
 
 
