@@ -105,9 +105,11 @@ image::images/newserver_space.png[New Server Spaces]
 Click "Finish" to complete the server instance creation, which will then show in the Servers view.
 
 
-== Create a Spring Serving-Web-Content Application
+== Import the Sample Spring Application
 
-Now we will create a Spring application that serves web content. In STS, open the "Import Spring Getting Started Content" wizard:
+Now we will import a Spring application that serves web content, and we will deploy this to Cloud Foundry at a later stage. 
+
+In STS, open the "Import Spring Getting Started Content" wizard:
 
 image::images/import_gsg.png[Import Getting Started]
 
@@ -165,7 +167,7 @@ finished staging and is now running.
 The application will also appear under the server instance in the Servers view.
 
 
-== Test the service
+== Test the Application
 
 Now that your application is running on Cloud Foundry, you can open the application's web site within STS by
 right-clicking on the application in the Servers view and selecting "Open Home Page".
