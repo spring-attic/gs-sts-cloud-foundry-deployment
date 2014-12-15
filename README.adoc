@@ -11,9 +11,9 @@ projects: []
 :icons: font
 :source-highlighter: prettify
 :project_id: gs-sts-cloud-foundry-deployment
-This guide walks you through the process of deploying a "hello world" Spring application to Cloud Foundry from Spring Tool Suite.
+This guide walks you through the process of deploying a "hello world" Spring application to Cloud Foundry from Spring Tool Suite (STS).
 
-== What you'll deploy to Cloud Foundry
+== What You'll Deploy to Cloud Foundry
 
 You'll deploy a Spring application to Cloud Foundry that will accept HTTP GET requests at:
 
@@ -33,11 +33,11 @@ The `name` parameter value overrides the default value of "World" and is reflect
     
 The `yourname` portion of the URL is what you will specify when you deploy your application to Cloud Foundry through STS.
     
-This application is based on an Spring service that serves web content. Further information on how to create the service from scratch can be found at
+This application is based on a Spring service that serves web content. Further information on how to create the service from scratch can be found at
 http://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC], or it can be imported into STS through the http://spring.io/guides/gs/sts/[Import Getting Started Content wizard].
 
 
-== What you'll need
+== What You'll Need
 
  - About 15 minutes
  - http://spring.io/tools/sts/all[Spring Tool Suite (STS)]
@@ -53,7 +53,7 @@ unpack the downloaded archive.
 When you're done, go ahead and launch STS.
 
 == Installing Cloud Foundry Eclipse
-If you are using STS version 3.6.3 or higher, Cloud Foundry Eclipse comes pre-installed, and you can skip this step. 
+If you are using STS version 3.6.3 or higher, which will be the case if you installed from the link up above, Cloud Foundry Eclipse comes pre-installed, and you can skip this step. 
 
 Otherwise, in STS, go to Window -> Install New Software.
 
