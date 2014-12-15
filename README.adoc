@@ -1,6 +1,6 @@
 ---
 tags: []
-projects: [spring-framework]
+projects: []
 ---
 :spring_version: current
 :jdk: http://www.oracle.com/technetwork/java/javase/downloads/index.html
@@ -10,7 +10,7 @@ projects: [spring-framework]
 :toc:
 :icons: font
 :source-highlighter: prettify
-:project_id: gs-spring-sts-cf-deployment
+:project_id: gs-sts-cloud-foundry-deployment
 This guide walks you through the process of deploying a "hello world" Spring application to Cloud Foundry from Spring Tool Suite.
 
 == What you'll deploy to Cloud Foundry
@@ -74,9 +74,10 @@ After Cloud Foundry Eclipse is installed, you will have to restart STS.
 
 == Creating a Server Instance to Cloud Foundry
 
-With Cloud Foundry Eclipse installed, you must first create a representation of the Cloud space target where you would like to deploy
-your application too. This is known as a "server instance" in the Eclipse Web Tools Platform framework, which Cloud Foundry Eclipse 
-contributes to. To create a Cloud Foundry server instance, open the Eclipse Servers view from the Window -> Show View menu, right-click on the view and select:
+With Cloud Foundry Eclipse installed, you must first specify a target Cloud space where you would like to deploy
+your application. This is known as a "server instance", which is a local representation of your target space.
+
+To create a Cloud Foundry server instance, open the Eclipse Servers view from the Window -> Show View menu, and then right-click on the view and select:
 
 New -> Server
 
@@ -88,13 +89,13 @@ Select Cloud Foundry under "Pivotal", and either keep the default server instanc
 image::images/newserver_pivotal.png[New Server Pivotal]
 
 
-Go to the next page and enter your username and password for your Pivotal Web Services account. Note that http://docs.run.pivotal.io/starting/index.html#signup[you must have an 
+Go to the next page and enter your username and password for your Pivotal Web Services account. Note that you must have http://docs.run.pivotal.io/starting/index.html#signup[an 
 account registered] as a prerequisite to deploying your application to PWS.
 
 image::images/newserver_credentials.png[New Server Credentials]
 
 
-Select "Next" to navigate to the following page, which will automatically attempt to validate your credentials. The subsequent page will display
+After entering your credentials, select "Next" to navigate to the following page, which will automatically attempt to validate your username and password. The subsequent page will display
 the organizations and spaces in your account. Select the target space for your deployment. In this guide we select a deployment 
 space.
 
@@ -104,17 +105,19 @@ image::images/newserver_space.png[New Server Spaces]
 Click "Finish" to complete the server instance creation, which will then show in the Servers view.
 
 
-
-
 == Create a Spring Serving-Web-Content Application
 
-Now we will deploy a Spring application that serves web content. In STS, open the "Import Spring Getting Started Content" wizard:
+Now we will create a Spring application that serves web content. In STS, open the "Import Spring Getting Started Content" wizard:
 
 image::images/import_gsg.png[Import Getting Started]
 
 
-In the search field, enter "sts" and the sts-cloud-foundry-deployment guide should appear. The wizard may take a few
-moments to download the content for the guide. Once the download is completed:
+In the search field, enter "sts cloud foundry" and the sts-cloud-foundry-deployment guide should appear. The wizard may take a few
+moments to download the content for the guide. 
+
+image::images/import_gsg_wizard.png[Import Getting Started Wizard]
+
+Once the download is completed:
 
 - Select the build type.
 - Select the "default" code set.
@@ -125,25 +128,71 @@ The import wizard will create a new project in your workspace called "sts-cloud-
 
 == Deploying to Cloud Foundry
 
+To deploy to Cloud Foundry, your Spring project has to first be configured for deployment through a simple step.
+In the Eclipse Package or Project Explorer, right-click on your Spring project, and select:
 
+Configure -> Enable as Cloud Foundry App
 
+image::images/enable_as_cf.png[Enable as Cloud Foundry App]
+
+Now simply drag and drop the project to your server instance in the Servers view.
+
+image::images/drag_drop.png[Drag and Drop]
+
+This will open the application deployment wizard with default values for your application, like the
+application name, URL, and memory.
+
+To ensure that the URL for the application has not yet been taken by another deployment of the same application, you can either:
+
+- Append a word after the default application name, like your name.
+
+image::images/deploy_wizard_1.png[Deployment Wizard 1]
+
+- Or, optionally, you can click "Next" and further configure the application by specifying your own URL.
+
+image::images/deploy_wizard_2.png[Deployment Wizard 2]
+
+The second page also allows you to adjust the application's memory. Further pages in the wizard also allow you
+to bind services and define environment variables.
+
+Once you have finished configuring your application, click "Finish" to complete the deployment.
+
+The deployment may take some time, but as the application is being deployed and started, the application's
+console will automatically open and indicate progress.
+
+image::images/console.png[Console]
+
+The application's logs will automatically be streamed to the console and will indicate when the application has
+finished staging and is now running.
+
+The application will also appear under the server instance in the Servers view.
 
 
 == Test the service
 
-Now that the web site is running on Cloud Foundry, visit https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting
+Now that your application is running on Cloud Foundry, you can open the application's web site within STS by
+right-clicking on the application in the Servers view and selecting "Open Home Page".
+
+image::images/open_home_page.png[Open Home Page]
+
+
+In the browser, visit http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting
 , where you see:
 
     "Hello, World!"
 
-Provide a `name` query string parameter with https:///gs-spring-sts-cf-deployment.cfapps.io:8080/greeting
-?name=User. Notice how the message changes from "Hello, World!" to "Hello, User!":
+Provide a `name` query string parameter with http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting?name=User. Notice how the message changes from "Hello, World!" to "Hello, User!":
 
     "Hello, User!"
 
-This change demonstrates that the {RequestParam}[`@RequestParam`] arrangement in `GreetingController` is working as expected. The `name` parameter has been given a default value of "World", but can always be explicitly overridden through the query string.
 
+== Application Health and Scaling
+
+You can check your application's health as well as scale your application's memory and instances by double-clicking
+on the application in the Servers view. This opens the Cloud Foundry server instance editor.
+
+image::images/editor.png[Editor]
 
 == Summary
 
-Congratulations! You have just developed a web page using Spring.
+Congratulations! You have just developed your Spring application to Cloud Foundry.
