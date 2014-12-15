@@ -5,6 +5,7 @@ projects: []
 :spring_version: current
 :jdk: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 :spring_boot_version: 1.1.10.RELEASE
+:pws: https://login.run.pivotal.io/login
 
 :toc:
 :icons: font
@@ -41,7 +42,7 @@ http://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring 
  - About 15 minutes
  - http://spring.io/tools/sts/all[Spring Tool Suite (STS)]
  - {jdk}[JDK 7] or later
- - http://docs.run.pivotal.io/starting/index.html#signup[Pivotal Web Services (PWS) account]
+ - {pws}[Pivotal Web Services (PWS) account]
  - http://docs.run.pivotal.io/buildpacks/java/sts.html[Cloud Foundry Eclipse]
 
 
@@ -88,7 +89,7 @@ Select Cloud Foundry under "Pivotal", and either keep the default server instanc
 image::images/newserver_pivotal.png[New Server Pivotal]
 
 
-Go to the next page and enter your username and password for your Pivotal Web Services account. Note that you must have http://docs.run.pivotal.io/starting/index.html#signup[an 
+Go to the next page and enter your username and password for your Pivotal Web Services account. Note that you must have {pws}[an 
 account registered] as a prerequisite to deploying your application to PWS.
 
 image::images/newserver_credentials.png[New Server Credentials]
