@@ -5,7 +5,6 @@ projects: []
 :spring_version: current
 :jdk: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 :spring_boot_version: 1.1.10.RELEASE
-:gs-serving-web-content: link:/guides/gs/serving-web-content
 
 :toc:
 :icons: font
@@ -34,7 +33,7 @@ The `name` parameter value overrides the default value of "World" and is reflect
 The `yourname` portion of the URL is what you will specify when you deploy your application to Cloud Foundry through STS.
     
 This application is based on an Spring service that serves web content. Further information on how to create the service from scratch can be found at
-{gs-serving-web-content}[Serving Web Content with Spring MVC], or it can be imported into STS through the Getting Started Guide Import Wizard.
+http://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC], or it can be imported into STS through the http://spring.io/guides/gs/sts/[Import Getting Started Content wizard].
 
 
 == What you'll need
@@ -96,7 +95,7 @@ image::images/newserver_credentials.png[New Server Credentials]
 
 
 After entering your credentials, select "Next" to navigate to the following page, which will automatically attempt to validate your username and password. The subsequent page will display
-the organizations and spaces in your account. Select the target space for your deployment. In this guide we select a deployment 
+the organizations and spaces in your account. Select the target space for your deployment. In this guide we select a development 
 space.
 
 image::images/newserver_space.png[New Server Spaces]
@@ -112,18 +111,15 @@ Now we will create a Spring application that serves web content. In STS, open th
 image::images/import_gsg.png[Import Getting Started]
 
 
-In the search field, enter "sts cloud foundry" and the sts-cloud-foundry-deployment guide should appear. The wizard may take a few
-moments to download the content for the guide. 
+In the search field, enter "sts cloud foundry" and the sts-cloud-foundry-deployment guide should appear.
 
 image::images/import_gsg_wizard.png[Import Getting Started Wizard]
-
-Once the download is completed:
 
 - Select the build type.
 - Select the "default" code set.
 - Click "Finish".
 
-The import wizard will create a new project in your workspace called "sts-cloud-foundry-deployment".
+The import wizard will create a new project in your workspace called "gs-sts-cloud-foundry-deployment".
 
 
 == Deploying to Cloud Foundry
@@ -195,4 +191,4 @@ image::images/editor.png[Editor]
 
 == Summary
 
-Congratulations! You have just developed your Spring application to Cloud Foundry.
+Congratulations! You have just deployed your Spring application to Cloud Foundry.
