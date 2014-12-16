@@ -17,7 +17,7 @@ This guide walks you through the process of deploying a "hello world" Spring app
 
 You'll deploy a Spring application to Cloud Foundry that will accept HTTP GET requests at:
 
-    http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting
+    http://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting
 
 and respond with a web page displaying a greeting:
 
@@ -25,16 +25,16 @@ and respond with a web page displaying a greeting:
 
 You can customize the greeting with an optional `name` parameter in the query string:
 
-    http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting?name=User
+    http://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting?name=User
 
 The `name` parameter value overrides the default value of "World" and is reflected in the response:
 
     "Hello, User!"
     
-The `yourname` portion of the URL is what you will specify when you deploy your application to Cloud Foundry through STS.
+The `myname` portion of the URL is what you will specify when you deploy your application to Cloud Foundry through STS.
     
 This application is based on a Spring service that serves web content. Further information on how to create the service from scratch can be found at
-http://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC], or it can be imported into STS through the http://spring.io/guides/gs/sts/[Import Getting Started Content wizard].
+http://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC], or it can be imported into STS through the http://spring.io/guides/gs/sts/[Import Spring Getting Started Content wizard].
 
 
 == What You'll Need
@@ -178,12 +178,12 @@ right-clicking on the application in the Servers view and selecting "Open Home P
 image::images/open_home_page.png[Open Home Page]
 
 
-In the browser, visit http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting
+In the browser, visit http://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting
 , where you see:
 
     "Hello, World!"
 
-Provide a `name` query string parameter with http://gs-sts-cloud-foundry-deployment-yourname.cfapps.io/greeting?name=User. Notice how the message changes from "Hello, World!" to "Hello, User!":
+Provide a `name` query string parameter with http://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting?name=User. Notice how the message changes from "Hello, World!" to "Hello, User!":
 
     "Hello, User!"
 
