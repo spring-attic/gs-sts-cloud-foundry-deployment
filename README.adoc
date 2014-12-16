@@ -127,7 +127,10 @@ The import wizard will create a new project in your workspace called "gs-sts-clo
 
 == Deploying to Cloud Foundry
 
-To deploy to Cloud Foundry, your Spring project has to first be configured for deployment through a simple step.
+If deploying a Spring Boot application to Cloud Foundry, your project has to first be configured for deployment through a simple step.
+
+This step is not required for non-Spring Boot applications.
+
 In the Eclipse Package or Project Explorer, right-click on your Spring project, and select:
 
 Configure -> Enable as Cloud Foundry App
