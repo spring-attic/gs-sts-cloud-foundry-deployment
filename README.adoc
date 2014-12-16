@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [sts, spring tool suite]
 projects: []
 ---
 :spring_version: current
