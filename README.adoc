@@ -5,7 +5,7 @@ projects: []
 :spring_version: current
 :jdk: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 :spring_boot_version: 1.1.10.RELEASE
-:pws: https://login.run.pivotal.io/login
+:pws: http://try.run.pivotal.io/sts-guide
 
 :toc:
 :icons: font
@@ -43,7 +43,7 @@ http://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring 
  - http://spring.io/tools/sts/all[Spring Tool Suite (STS)]
  - {jdk}[JDK 7] or later
  - {pws}[Pivotal Web Services (PWS) account]
- - http://docs.run.pivotal.io/buildpacks/java/sts.html[Cloud Foundry Eclipse]
+ - http://docs.run.pivotal.io/buildpacks/java/sts.html[Cloud Foundry Tools]
 
 
 == Installing STS
@@ -52,29 +52,13 @@ unpack the downloaded archive.
 
 When you're done, go ahead and launch STS.
 
-== Installing Cloud Foundry Eclipse
-If you are using STS version 3.6.3 or higher, which will be the case if you installed from the link up above, Cloud Foundry Eclipse comes pre-installed, and you can skip this step. 
-
-Otherwise, in STS, go to Window -> Install New Software.
-
-image::images/install_menu.png[Install Menu]
-
-
-In the Install dialogue, enter the following software installation URL for Cloud Foundry Eclipse:
-
-http://dist.springsource.com/release/TOOLS/cloudfoundry
-
-image::images/install_dialogue.png[Install Cloud Foundry]
-
-
-Select the plug-in from the list and continue with the wizard until completion.
-
-After Cloud Foundry Eclipse is installed, you will have to restart STS.
+== Cloud Foundry Tools
+Cloud Foundry Tools comes pre-installed in STS version 3.7.2 or higher, which is required and will be the case if you installed from the link up above. 
 
 
 == Creating a Server Instance to Cloud Foundry
 
-With Cloud Foundry Eclipse installed, you must first specify a target Cloud space where you would like to deploy
+With Cloud Foundry Tools installed, you must first specify a target Cloud space where you would like to deploy
 your application. This is known as a "server instance", which is a local representation of your target space.
 
 To create a Cloud Foundry server instance, open the Eclipse Servers view from the Window -> Show View menu, and then right-click on the view and select:
@@ -127,16 +111,6 @@ The import wizard will create a new project in your workspace called "gs-sts-clo
 
 == Deploying to Cloud Foundry
 
-If deploying a Spring Boot application to Cloud Foundry, your project has to first be configured for deployment through a simple step.
-
-This step is not required for non-Spring Boot applications.
-
-In the Eclipse Package or Project Explorer, right-click on your Spring project, and select:
-
-Configure -> Enable as Cloud Foundry App
-
-image::images/enable_as_cf.png[Enable as Cloud Foundry App]
-
 Now simply drag and drop the project to your server instance in the Servers view.
 
 image::images/drag_drop.png[Drag and Drop]
@@ -144,13 +118,10 @@ image::images/drag_drop.png[Drag and Drop]
 This will open the application deployment wizard with default values for your application, like the
 application name, URL, and memory.
 
-To ensure that the URL for the application has not yet been taken by another deployment of the same application, you can either:
+To ensure that the URL for the application has not yet been taken by another deployment of the same application, the wizard
+will automatically suggest a new application name if necessary, which it will then use to define a default URL. 
 
-- Append a word after the default application name, like your name.
-
-image::images/deploy_wizard_1.png[Deployment Wizard 1]
-
-- Or, optionally, you can click "Next" and further configure the application by specifying your own URL.
+Optionally, you can click "Next" and further configure the application by specifying your own URL.
 
 image::images/deploy_wizard_2.png[Deployment Wizard 2]
 
