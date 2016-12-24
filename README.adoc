@@ -4,7 +4,7 @@ projects: []
 ---
 :spring_version: current
 :jdk: http://www.oracle.com/technetwork/java/javase/downloads/index.html
-:spring_boot_version: 1.1.10.RELEASE
+:spring_boot_version: 1.4.3.RELEASE
 :pws: http://try.run.pivotal.io/sts-guide
 
 :toc:

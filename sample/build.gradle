@@ -5,24 +5,23 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.10.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'gs-serving-web-content'
+    baseName = 'gs-sts-cloud-foundry-deployment'
     version =  '0.1.0'
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://repo.spring.io/libs-release" }
 }
 
 dependencies {
@@ -31,5 +30,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+    gradleVersion = '2.9'
 }
