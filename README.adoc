@@ -3,9 +3,9 @@ tags: [sts, spring tool suite]
 projects: []
 ---
 :spring_version: current
-:jdk: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+:jdk: https://www.oracle.com/technetwork/java/javase/downloads/index.html
 :spring_boot_version: 1.5.3.RELEASE
-:pws: http://try.run.pivotal.io/sts-guide
+:pws: https://try.run.pivotal.io/sts-guide
 
 :toc:
 :icons: font
@@ -17,7 +17,7 @@ This guide walks you through the process of deploying a "hello world" Spring app
 
 You'll deploy a Spring Boot application to Cloud Foundry that will accept HTTP GET requests at:
 
-    http://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting
+    https://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting
   
 The application URL will vary depending on the host portion that you have to change later on in this guide.
 
@@ -27,7 +27,7 @@ The application will then respond with a web page displaying a greeting:
 
 You can customize the greeting with an optional `name` parameter in the query string:
 
-    http://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting?name=User
+    https://gs-sts-cloud-foundry-deployment-myname.cfapps.io/greeting?name=User
 
 The `name` parameter value overrides the default value of "World" and is reflected in the response:
 
@@ -36,16 +36,16 @@ The `name` parameter value overrides the default value of "World" and is reflect
 IMPORTANT: The `myname` portion of the URL is what you will change when you deploy your application to Cloud Foundry through STS, to avoid host-taken errors during deployment.
     
 This application is based on a Spring service that serves web content. Further information on how to create the service from scratch can be found at
-http://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC], or it can be imported into STS through the http://spring.io/guides/gs/sts/[Import Spring Getting Started Content wizard].
+https://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC], or it can be imported into STS through the https://spring.io/guides/gs/sts/[Import Spring Getting Started Content wizard].
 
 
 == What You'll Need
 
  - About 15 minutes
- - http://spring.io/tools/sts/all[Spring Tool Suite (STS)]
+ - https://spring.io/tools/sts/all[Spring Tool Suite (STS)]
  - {jdk}[JDK 8] or later
  - {pws}[Pivotal Web Services (PWS) account]
- - http://docs.spring.io/sts/nan/v373/NewAndNoteworthy.html#bootdash[Spring Boot Dashboard]
+ - https://docs.spring.io/sts/nan/v373/NewAndNoteworthy.html#bootdash[Spring Boot Dashboard]
 
 
 == Installing STS
