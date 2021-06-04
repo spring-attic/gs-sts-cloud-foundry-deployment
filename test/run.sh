@@ -3,7 +3,7 @@ cd $(dirname $0)
 
 cd ../sample
 
-mvn clean package
+./mvnw clean package
 ret=$?
 if [ $ret -ne 0 ]; then
   exit $ret
